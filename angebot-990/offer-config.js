@@ -1,3 +1,5 @@
+import { getHotmartCheckout } from '/offer-flow.js';
+
 // Substitua checkoutUrl somente pelo link Hotmart específico da oferta de 9,90 €.
 // declineUrl fica reservado para o destino de recusa, sem controle visível na página.
 export const recoveryOffer = {
@@ -6,10 +8,5 @@ export const recoveryOffer = {
 };
 
 export function getRecoveryCheckout() {
-  try {
-    const url = new URL(recoveryOffer.checkoutUrl);
-    return url.protocol === 'https:' && url.hostname === 'pay.hotmart.com' ? url : null;
-  } catch {
-    return null;
-  }
+  return getHotmartCheckout(recoveryOffer.checkoutUrl);
 }

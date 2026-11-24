@@ -55,18 +55,18 @@
   <footer>© 2026 Gesunde Alltagsküche. Alle Rechte vorbehalten.</footer>
 
   <script type="module">
+    import { enableHotmartCheckout, getHotmartCheckout, redirectOnExit } from '/offer-flow.js';
     import { checkoutUrl } from '/upsell/offer-config.js';
+    import { checkoutUrl as secondOfferCheckoutUrl } from '/upsell-1490/offer-config.js';
 
-    try {
-      const checkout = new URL(checkoutUrl);
-      if (checkout.protocol === 'https:' && checkout.hostname === 'pay.hotmart.com') {
-        const button = document.getElementById('upsell-checkout');
-        button.href = checkout.href;
-        button.removeAttribute('role');
-        button.removeAttribute('aria-disabled');
-      }
-    } catch {
-      // The button stays disabled until the specific upsell link is configured.
+    enableHotmartCheckout(document.getElementById('upsell-checkout'), getHotmartCheckout(checkoutUrl));
+
+    if (getHotmartCheckout(secondOfferCheckoutUrl)) {
+      redirectOnExit({
+        checkoutSelector: '#upsell-checkout[href]',
+        offerPath: '/upsell-1490/',
+        shownKey: 'gesunde-alltagskueche:second-upsell-offer-shown',
+      });
     }
   </script>
 </body>

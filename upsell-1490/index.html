@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Beide E-Books für 14,90 € · Gesunde Alltagsküche</title>
+  <link rel="stylesheet" href="/angebot-990/offer.css">
+  <style>
+    h1 em {
+      white-space: normal;
+    }
+
+    .book-pair {
+      margin: 0;
+    }
+
+    .book-visual {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.55rem;
+    }
+
+    .book-captions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin: 0.8rem 0 0;
+    }
+
+    .book-captions strong {
+      display: block;
+      margin-top: 0.25rem;
+      font: 700 0.95rem/1.25 var(--serif);
+      overflow-wrap: anywhere;
+    }
+
+    .book-label {
+      display: block;
+      color: var(--paprika-dark);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.045em;
+      line-height: 1.25;
+    }
+
+    .bonus-label {
+      color: var(--olive);
+    }
+
+    .keep-together {
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="offer-bar">15,00 € WENIGER FÜR BEIDE E-BOOKS</div>
+    <p class="wordmark">Gesunde Alltagsküche</p>
+  </header>
+
+  <main>
+    <p class="eyebrow">KURZ BEVOR DU WEITERGEHST …</p>
+    <h1>Hol dir beide E-Books <em>für weniger als die Hälfte.</em></h1>
+    <p class="introduction">Ergänze dein Kochbuch um Wissen zu Wurzeln, Kräutern und Tees. In diesem zweiten Angebot erhältst du beide E-Books für 14,90 € statt 29,90 €.</p>
+
+    <section class="offer-card" aria-labelledby="offer-label">
+      <h2 class="offer-label" id="offer-label">DEIN ZWEITES ZUSATZANGEBOT</h2>
+
+      <figure class="book-pair">
+        <img class="book-visual" src="/upsell/beide-e-books.webp" width="1536" height="1024" alt="Die beiden Buchcover nebeneinander">
+        <figcaption class="book-captions">
+          <div>
+            <span class="book-label">DEIN E-BOOK</span>
+            <strong>Gesund leben mit der Kraft der Pflanzen</strong>
+          </div>
+          <div>
+            <span class="book-label bonus-label">BONUS OHNE AUFPREIS</span>
+            <strong>Traditionelles Kräuterwissen für ein gesundes Leben</strong>
+          </div>
+        </figcaption>
+      </figure>
+
+      <p class="prices"><del class="old-price">29,90 €</del><strong class="new-price">14,90 €</strong></p>
+      <p class="savings">Du sparst 15,00 € und erhältst beide E-Books.</p>
+      <a id="second-offer-checkout" class="purchase-link" role="link" aria-disabled="true"><span>JA, ICH MÖCHTE BEIDE <span class="keep-together">E-BOOKS</span> FÜR <span class="keep-together">14,90 €</span></span></a>
+      <p class="payment-info">Zahlung über Hotmart</p>
+    </section>
+
+    <ul class="benefits" role="list">
+      <li><span class="check" aria-hidden="true">✓</span>Welche Pflanzen bei Gelenkbeschwerden untersucht wurden und was die Ergebnisse für selbst aufgebrühten Tee aussagen</li>
+      <li><span class="check" aria-hidden="true">✓</span>Tee-Rezepte mit genauen Mengen und Ziehzeiten, darunter eine mildere Ingwervariante</li>
+      <li><span class="check" aria-hidden="true">✓</span>Sechs Pflanzen im Bonus-E-Book mit traditionellen Anwendungen und heutigem Wissen</li>
+      <li><span class="check" aria-hidden="true">✓</span>Ein anklickbares Bildverzeichnis, das dich direkt zur gewünschten Pflanze führt</li>
+    </ul>
+  </main>
+
+  <footer>© 2026 Gesunde Alltagsküche. Alle Rechte vorbehalten.</footer>
+
+  <script type="module">
+    import { enableHotmartCheckout, getHotmartCheckout } from '/offer-flow.js';
+    import { checkoutUrl } from '/upsell-1490/offer-config.js';
+
+    enableHotmartCheckout(document.getElementById('second-offer-checkout'), getHotmartCheckout(checkoutUrl));
+  </script>
+</body>
+</html>
