@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Gesunde Alltagsküche · Dein Sonderpreis</title>
+  <link rel="stylesheet" href="/angebot-990/offer.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="offer-bar">DEIN KOCHBUCH FÜR 10 € WENIGER</div>
+    <p class="wordmark">Gesunde Alltagsküche</p>
+  </header>
+
+  <main>
+    <p class="eyebrow">BEVOR DU GEHST …</p>
+    <h1>Hol dir alle 101 Rezepte <em>für 9,90 €</em> statt 19,90 €.</h1>
+    <p class="introduction">Was koche ich heute? Mit 101 Rezepten und vier Wochenplänen findest du Ideen für die ganze Woche. Für 9,90 € erhältst du das vollständige Kochbuch und den Ratgeber „Küchenpannen retten“.</p>
+
+    <section class="offer-card" aria-labelledby="offer-label">
+      <h2 class="offer-label" id="offer-label">DEIN SONDERPREIS</h2>
+      <img class="book" src="/danke/kochbuch.webp" width="720" height="720" alt="Gesunde Alltagsküche – 101 Rezepte mit natürlichen Zutaten">
+      <p class="prices"><del class="old-price">19,90 €</del><strong class="new-price">9,90 €</strong></p>
+      <p class="savings">Du sparst 10 € und erhältst beide E-Books.</p>
+      <a class="purchase-link" id="offer-checkout" role="link" aria-disabled="true">JA, ICH MÖCHTE BEIDE E-BOOKS FÜR 9,90 €</a>
+      <p class="payment-info">Zahlung über Hotmart · Zugang per E-Mail</p>
+    </section>
+
+    <ul class="benefits" role="list">
+      <li><span class="check" aria-hidden="true">✓</span>101 Rezepte mit natürlichen Zutaten auf 143 Seiten</li>
+      <li><span class="check" aria-hidden="true">✓</span>Vier Wochenpläne mit Einkaufslisten für zwei Personen</li>
+      <li><span class="check" aria-hidden="true">✓</span>Inklusive „Küchenpannen retten“ mit 12 Lösungen für typische Küchenpannen</li>
+      <li><span class="check" aria-hidden="true">✓</span>Nach dem Kauf erhältst du per E-Mail Zugang zu beiden PDFs.</li>
+    </ul>
+  </main>
+
+  <footer>© 2026 Gesunde Alltagsküche. Alle Rechte vorbehalten.</footer>
+
+  <script type="module">
+    import { getRecoveryCheckout } from '/angebot-990/offer-config.js';
+
+    const checkout = getRecoveryCheckout();
+    if (checkout) {
+      const link = document.getElementById('offer-checkout');
+      link.href = checkout.href;
+      link.removeAttribute('role');
+      link.removeAttribute('aria-disabled');
+    }
+  </script>
+</body>
+</html>

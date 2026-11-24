@@ -1,0 +1,213 @@
+:root {
+  color-scheme: light;
+  --cream: #faf5eb;
+  --card: #fffdfa;
+  --brown: #39271e;
+  --muted-brown: #645347;
+  --paprika: #ad3c31;
+  --paprika-dark: #973128;
+  --olive: #52632c;
+  --serif: Georgia, "Times New Roman", serif;
+  color: var(--brown);
+  background: var(--cream);
+  font: 1rem/1.55 system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.site-header {
+  text-align: center;
+}
+
+.offer-bar {
+  padding: 0.65rem 1rem;
+  background: linear-gradient(105deg, var(--paprika), var(--paprika-dark));
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.wordmark {
+  margin: 1.2rem 1rem 0;
+  font: italic 700 1.65rem/1.2 var(--serif);
+}
+
+main {
+  width: min(30rem, calc(100% - 2rem));
+  margin: 2.4rem auto 0;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--paprika-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 0;
+  font: 700 clamp(1.75rem, 5vw, 2.025rem)/1.08 var(--serif);
+  text-wrap: balance;
+}
+
+h1 em {
+  color: var(--paprika);
+  white-space: nowrap;
+}
+
+.introduction {
+  margin: 1rem 0 1.65rem;
+  color: var(--muted-brown);
+  text-wrap: pretty;
+}
+
+.offer-card {
+  position: relative;
+  padding: 2.35rem clamp(0.95rem, 4vw, 1.4rem) 1.3rem;
+  border: 2px solid var(--paprika);
+  border-radius: 1.15rem;
+  background: var(--card);
+  box-shadow: 0 0.95rem 2rem rgb(57 39 30 / 9%);
+}
+
+.offer-label {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  margin: 0;
+  padding: 0.28rem 0.95rem;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: var(--paprika);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+}
+
+.book {
+  display: block;
+  width: min(14.25rem, 100%);
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0.6rem;
+}
+
+.prices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.75rem;
+  margin: 1rem 0 0;
+}
+
+.old-price {
+  color: var(--muted-brown);
+}
+
+.new-price {
+  color: var(--paprika);
+  font: 700 clamp(2.8rem, 13vw, 3.5rem)/1 var(--serif);
+}
+
+.savings {
+  margin: 0.45rem 0 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.purchase-link {
+  display: grid;
+  min-height: 4.2rem;
+  width: 100%;
+  place-items: center;
+  padding: 0.9rem 1.15rem;
+  border-radius: 999px;
+  background: var(--paprika);
+  color: #fff;
+  box-shadow: 0 0.7rem 1.15rem rgb(173 60 49 / 22%);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-decoration: none;
+  text-wrap: balance;
+}
+
+.purchase-link[href]:hover {
+  background: var(--paprika-dark);
+}
+
+.purchase-link:focus-visible {
+  outline: 3px solid var(--olive);
+  outline-offset: 4px;
+}
+
+.payment-info {
+  margin: 0.9rem 0 0;
+  color: var(--muted-brown);
+  font-size: 0.85rem;
+}
+
+.benefits {
+  display: grid;
+  gap: 0.95rem;
+  margin: 2rem 0 0;
+  padding: 0 0.2rem;
+  list-style: none;
+  text-align: left;
+}
+
+.benefits li {
+  display: grid;
+  grid-template-columns: 1.3rem 1fr;
+  align-items: start;
+  gap: 0.65rem;
+}
+
+.check {
+  display: grid;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.12rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--olive);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+footer {
+  margin: clamp(3.2rem, 7vw, 4.8rem) 1rem 0;
+  padding-bottom: 2.25rem;
+  color: var(--muted-brown);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+@media (max-width: 35rem) {
+  main {
+    margin-top: 1.9rem;
+  }
+
+  .introduction {
+    margin-bottom: 1.55rem;
+  }
+
+  .benefits {
+    margin-top: 1.75rem;
+  }
+}
