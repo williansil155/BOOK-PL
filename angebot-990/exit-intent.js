@@ -7,5 +7,6 @@ if (getRecoveryCheckout()) {
     offerPath: '/angebot-990/',
     shownKey: 'gesunde-alltagskueche:recovery-offer-shown',
     scrollExit: true,
+    backExit: true,
   });
 }
