@@ -84,7 +84,10 @@
 
       <p class="prices"><del class="old-price">29,90 €</del><strong class="new-price">14,90 €</strong></p>
       <p class="savings">Du sparst 15,00 € und erhältst beide E-Books.</p>
-      <a id="second-offer-checkout" class="purchase-link" role="link" aria-disabled="true"><span>JA, ICH MÖCHTE BEIDE <span class="keep-together">E-BOOKS</span> FÜR <span class="keep-together">14,90 €</span></span></a>
+      <div id="hotmart-sales-funnel" hidden></div>
+      <div id="offer-preview">
+        <a id="second-offer-checkout" class="purchase-link" role="link" aria-disabled="true"><span>JA, ICH MÖCHTE BEIDE <span class="keep-together">E-BOOKS</span> FÜR <span class="keep-together">14,90 €</span></span></a>
+      </div>
       <p class="payment-info">Zahlung über Hotmart</p>
     </section>
 
@@ -100,9 +103,14 @@
 
   <script type="module">
     import { enableHotmartCheckout, getHotmartCheckout } from '/offer-flow.js';
+    import { loadHotmartFunnel } from '/hotmart-funnel.js';
     import { checkoutUrl } from '/upsell-1490/offer-config.js';
 
-    enableHotmartCheckout(document.getElementById('second-offer-checkout'), getHotmartCheckout(checkoutUrl));
+    const funnel = document.getElementById('hotmart-sales-funnel');
+    const preview = document.getElementById('offer-preview');
+    if (!loadHotmartFunnel(funnel, preview)) {
+      enableHotmartCheckout(document.getElementById('second-offer-checkout'), getHotmartCheckout(checkoutUrl));
+    }
   </script>
 </body>
 </html>

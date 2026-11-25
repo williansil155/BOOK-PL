@@ -147,6 +147,29 @@ h1 em {
   font-size: 0.9rem;
 }
 
+.offer-actions {
+  min-width: 0;
+}
+
+.offer-preview:not([hidden]) {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.offer-decline {
+  justify-self: center;
+  padding: 0.35rem 0.75rem;
+  color: var(--muted);
+  text-decoration: underline;
+}
+
+.offer-preview-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
 .offer-button {
   display: grid;
   min-height: 3.85rem;
@@ -166,11 +189,8 @@ h1 em {
   background: var(--paprika-dark);
 }
 
-.keep-together {
-  white-space: nowrap;
-}
-
-.offer-button:focus-visible {
+.offer-button:focus-visible,
+.offer-decline:focus-visible {
   outline: 3px solid var(--olive);
   outline-offset: 4px;
 }

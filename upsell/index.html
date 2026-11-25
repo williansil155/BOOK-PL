@@ -36,7 +36,14 @@
         <h2 id="offer-price">29,90 €</h2>
         <p>Beide E-Books</p>
       </div>
-      <a id="upsell-checkout" class="offer-button" role="link" aria-disabled="true"><span>Ja, ich möchte das <span class="keep-together">E-Book</span> mit Bonus erhalten</span></a>
+      <div class="offer-actions">
+        <div id="hotmart-sales-funnel" hidden></div>
+        <div class="offer-preview" id="offer-preview">
+          <a id="upsell-checkout" class="offer-button" role="link" aria-disabled="true">Ja, jetzt sichern!</a>
+          <a id="upsell-decline" class="offer-decline" role="link" aria-disabled="true">Nein, danke.</a>
+          <p class="offer-preview-note" id="offer-preview-note">Vorschau. Die Auswahl wird im Hotmart-Funnel freigeschaltet.</p>
+        </div>
+      </div>
     </section>
 
     <div class="details">
@@ -56,17 +63,30 @@
 
   <script type="module">
     import { enableHotmartCheckout, getHotmartCheckout, redirectOnExit } from '/offer-flow.js';
+    import { loadHotmartFunnel } from '/hotmart-funnel.js';
     import { checkoutUrl } from '/upsell/offer-config.js';
     import { checkoutUrl as secondOfferCheckoutUrl } from '/upsell-1490/offer-config.js';
 
-    enableHotmartCheckout(document.getElementById('upsell-checkout'), getHotmartCheckout(checkoutUrl));
+    const funnel = document.getElementById('hotmart-sales-funnel');
+    const preview = document.getElementById('offer-preview');
+    if (!loadHotmartFunnel(funnel, preview)) {
+      const checkout = getHotmartCheckout(checkoutUrl);
+      const secondOffer = getHotmartCheckout(secondOfferCheckoutUrl);
+      enableHotmartCheckout(document.getElementById('upsell-checkout'), checkout);
+      document.getElementById('offer-preview-note').hidden = Boolean(checkout || secondOffer);
 
-    if (getHotmartCheckout(secondOfferCheckoutUrl)) {
-      redirectOnExit({
-        checkoutSelector: '#upsell-checkout[href]',
-        offerPath: '/upsell-1490/',
-        shownKey: 'gesunde-alltagskueche:second-upsell-offer-shown',
-      });
+      if (secondOffer) {
+        const decline = document.getElementById('upsell-decline');
+        decline.href = '/upsell-1490/';
+        decline.removeAttribute('role');
+        decline.removeAttribute('aria-disabled');
+
+        redirectOnExit({
+          checkoutSelector: '#upsell-checkout[href]',
+          offerPath: '/upsell-1490/',
+          shownKey: 'gesunde-alltagskueche:second-upsell-offer-shown',
+        });
+      }
     }
   </script>
 </body>
