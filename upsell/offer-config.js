@@ -1,2 +1,2 @@
 // Substitua pelo link Hotmart específico deste upsell.
-export const checkoutUrl = '[LINK DO CHECKOUT HOTMART – UPSELL DE 29,90 €]';
+export const checkoutUrl = 'https://pay.hotmart.com/I108649584R?off=rz6w5ht7';
