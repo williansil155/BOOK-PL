@@ -15,12 +15,13 @@ export function enableHotmartCheckout(link, checkout) {
   link.removeAttribute('aria-disabled');
 }
 
-export function redirectOnExit({ checkoutSelector, offerPath, shownKey, touchExit = false }) {
+export function redirectOnExit({ checkoutSelector, offerPath, shownKey, scrollExit = false }) {
   const watchMouse = window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches;
-  const watchTouch = touchExit && window.matchMedia('(pointer: coarse)').matches;
-  if (!watchMouse && !watchTouch) return;
+  const watchScroll = scrollExit && window.matchMedia('(pointer: coarse)').matches;
+  if (!watchMouse && !watchScroll) return;
 
   let checkoutSelected = false;
+  let offerOpened = false;
 
   document.addEventListener('click', (event) => {
     if (event.target instanceof Element && event.target.closest(checkoutSelector)) {
@@ -33,7 +34,7 @@ export function redirectOnExit({ checkoutSelector, offerPath, shownKey, touchExi
   });
 
   function openOffer() {
-    if (checkoutSelected || document.visibilityState !== 'visible' || document.querySelector('dialog[open]')) {
+    if (offerOpened || checkoutSelected || document.visibilityState !== 'visible' || document.querySelector('dialog[open]')) {
       return;
     }
 
@@ -41,10 +42,16 @@ export function redirectOnExit({ checkoutSelector, offerPath, shownKey, touchExi
       if (sessionStorage.getItem(shownKey)) return;
       sessionStorage.setItem(shownKey, '1');
     } catch {
-      // Tab storage prevents reopening the offer when the visitor goes back.
-      return;
+      // Use the existing history entry when browser storage is blocked.
+      if (history.state?.[shownKey]) return;
+      try {
+        history.replaceState({ ...history.state, [shownKey]: true }, '');
+      } catch {
+        return;
+      }
     }
 
+    offerOpened = true;
     window.location.assign(offerPath);
   }
 
@@ -56,30 +63,16 @@ export function redirectOnExit({ checkoutSelector, offerPath, shownKey, touchExi
     });
   }
 
-  if (watchTouch) {
-    let readPastTop = false;
-    let gestureStart = null;
+  if (watchScroll) {
+    let previousY = Math.max(0, window.scrollY);
+    let furthestY = previousY;
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY >= window.innerHeight / 2) readPastTop = true;
-    }, { passive: true });
-
-    document.addEventListener('touchstart', (event) => {
-      gestureStart = readPastTop && window.scrollY <= 12 && event.touches.length === 1
-        ? event.touches[0]
-        : null;
-    }, { passive: true });
-
-    document.addEventListener('touchmove', (event) => {
-      if (!gestureStart || event.touches.length !== 1 || window.scrollY > 12) return;
-
-      const touch = event.touches[0];
-      const down = touch.clientY - gestureStart.clientY;
-      const across = Math.abs(touch.clientX - gestureStart.clientX);
-      if (down >= 90 && down > across * 2) {
-        gestureStart = null;
-        openOffer();
-      }
+      const y = Math.max(0, window.scrollY);
+      furthestY = Math.max(furthestY, y);
+      const returnedToTop = furthestY >= window.innerHeight / 2 && previousY > 12 && y <= 12;
+      previousY = y;
+      if (returnedToTop) openOffer();
     }, { passive: true });
   }
 }
