@@ -15,7 +15,14 @@ export function enableHotmartCheckout(link, checkout) {
   link.removeAttribute('aria-disabled');
 }
 
-export function redirectOnExit({ checkoutSelector, offerPath, shownKey, scrollExit = false, backExit = false }) {
+export function redirectOnExit({
+  checkoutSelector,
+  offerPath,
+  shownKey,
+  scrollExit = false,
+  backExit = false,
+  oncePerTab = true,
+}) {
   const touchDevice = window.matchMedia('(pointer: coarse)').matches;
   const watchMouse = window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches;
   const watchScroll = scrollExit && touchDevice;
@@ -30,6 +37,7 @@ export function redirectOnExit({ checkoutSelector, offerPath, shownKey, scrollEx
 
   function hasShownOffer() {
     if (offerOpened || history.state?.[shownKey]) return true;
+    if (!oncePerTab) return false;
     try {
       return sessionStorage.getItem(shownKey) === '1';
     } catch {
@@ -66,19 +74,26 @@ export function redirectOnExit({ checkoutSelector, offerPath, shownKey, scrollEx
     checkoutSelected = false;
   });
 
-  function openOffer(replaceEntry = false) {
-    if (!canOpenOffer()) return false;
-
-    try {
-      sessionStorage.setItem(shownKey, '1');
-    } catch {
-      // Use the existing history entry when browser storage is blocked.
+  function markOfferShown() {
+    if (oncePerTab) {
       try {
-        history.replaceState({ ...history.state, [shownKey]: true }, '');
+        sessionStorage.setItem(shownKey, '1');
+        return true;
       } catch {
-        return false;
+        // Fall back to marking the current visit when browser storage is blocked.
       }
     }
+
+    try {
+      history.replaceState({ ...history.state, [shownKey]: true }, '');
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function openOffer(replaceEntry = false) {
+    if (!canOpenOffer() || !markOfferShown()) return false;
 
     offerOpened = true;
     if (replaceEntry) window.location.replace(offerPath);

@@ -8,5 +8,6 @@ if (getRecoveryCheckout()) {
     shownKey: 'gesunde-alltagskueche:recovery-offer-shown',
     scrollExit: true,
     backExit: true,
+    oncePerTab: false,
   });
 }
