@@ -160,6 +160,17 @@ h1 em {
   font-size: 0.85rem;
 }
 
+.offer-notice {
+  margin: 1rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-inline-start: 3px solid var(--paprika);
+  border-radius: 0.45rem;
+  background: #fbede6;
+  color: var(--paprika-dark);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
 .benefits {
   display: grid;
   gap: 0.95rem;
